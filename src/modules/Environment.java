@@ -4,8 +4,10 @@ import edu.memphis.ccrg.lida.environment.EnvironmentImpl;
 import edu.memphis.ccrg.lida.framework.tasks.FrameworkTaskImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import ws3dproxy.CommandUtility;
 import ws3dproxy.WS3DProxy;
 import ws3dproxy.model.Creature;
@@ -61,7 +63,7 @@ public class Environment extends EnvironmentImpl {
             CommandUtility.sendNewBrick(1, 91, 249, 96, 600);
             
 
-            CommandUtility.sendNewJewel(1, 780, 270);
+            CommandUtility.sendNewJewel(2, 780, 270);
             
             creature.start();
 
@@ -74,6 +76,17 @@ public class Environment extends EnvironmentImpl {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private String currentActionCreature; 
+    
+    public String getLastAction() {
+        
+        return currentActionCreature;
+    }
+    
+    private void setLastAction(String currentAction) {
+        currentActionCreature = currentAction;
     }
 
     private class BackgroundTask extends FrameworkTaskImpl {
@@ -182,6 +195,11 @@ public class Environment extends EnvironmentImpl {
     private void performAction(String currentAction) {
         try {
             //System.out.println("Action: "+currentAction);
+            
+            
+            //setLasAction to get in panel Lida :D
+            setLastAction(currentAction);
+            
             switch (currentAction) {
                 case "rotate":
 
