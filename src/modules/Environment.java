@@ -49,7 +49,7 @@ public class Environment extends EnvironmentImpl {
             System.out.println("Reseting the WS3D World ...");
             World world = proxy.getWorld();
             world.reset();
-            creature = proxy.createCreature(150, 300, 1);
+            creature = proxy.createCreature(0, 290, 1);
             
 
             int height = world.getEnvironmentHeight();
@@ -57,7 +57,9 @@ public class Environment extends EnvironmentImpl {
 
             CommandUtility.sendNewBrick(1, 419, 320, 425.0, 595);
             CommandUtility.sendNewBrick(1, 259, 6, 264, 311);
-            CommandUtility.sendNewBrick(1, 577, 24, 582, 302);
+            CommandUtility.sendNewBrick(1, 577, 24, 582, 302);            
+            CommandUtility.sendNewBrick(1, 91, 249, 96, 600);
+            
 
             CommandUtility.sendNewJewel(1, 780, 270);
             
