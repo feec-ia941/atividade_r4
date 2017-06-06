@@ -55,12 +55,13 @@ public class Environment extends EnvironmentImpl {
             int height = world.getEnvironmentHeight();
             int width = world.getEnvironmentWidth();
 
-            CommandUtility.sendNewBrick(1, 308, 2, 340, 348);
-            //CommandUtility.sendNewBrick(1, 479, 170, 517, 605);
-            //CommandUtility.sendNewBrick(1, 479, 170, 517, 605);
+            CommandUtility.sendNewBrick(1, 419, 320, 425.0, 595);
+            CommandUtility.sendNewBrick(1, 259, 6, 264, 311);
+            CommandUtility.sendNewBrick(1, 577, 24, 582, 302);
+
             System.out.println("Starting the WS3D Resource Generator ... ");
 
-            //  World.grow(1);
+            //World.grow(1);
             Thread.sleep(4000);
             creature.updateState();
             System.out.println("DemoLIDA has started...");
@@ -141,7 +142,7 @@ public class Environment extends EnvironmentImpl {
                     // Identifica a joia que nao esta no leaflet
                     jewel = thing;
                 }
-            } else if (food == null && creature.getFuel() <= 300.0
+            } else if (food == null
                     && (thing.getCategory() == Constants.categoryFOOD
                     || thing.getCategory() == Constants.categoryPFOOD
                     || thing.getCategory() == Constants.categoryNPFOOD)) {
@@ -168,38 +169,25 @@ public class Environment extends EnvironmentImpl {
     double y1 = 0;
     double y2 = 0;
 
+    List<String> listBrink = new ArrayList<>();
+
     private void performAction(String currentAction) {
         try {
             //System.out.println("Action: "+currentAction);
             switch (currentAction) {
                 case "rotate":
-                    if (brink.getName() != nameBrinck) {
-                        creature.rotate(0.2);
-                    } else{ //                    int x = 770; 
-                    //                    int y = 260;
-                    //                    
-                    //                    double distanciCreature = GetGeometricDistanceToCreature(x, y, x, y, creature.getPosition().getX(), creature.getPosition().getY());
-                    //                    if(distanciCreature > 50){
-                    //                        creature.moveto(1,x, y);
-                    //                    }else{
-                    //                        creature.move(0.0, 0.0, 0.0);
-                    //                    }
-                    //CommandUtility.sendSetTurn(creature.getIndex(), -1.0, -1.0, 3.0);
-                        
-                        double distanciCreatureY1 = GetGeometricDistanceToCreature(x1, y1, x1, y1, creature.getPosition().getX(), creature.getPosition().getY());
-                        double distanciCreatureY2 = GetGeometricDistanceToCreature(x2, y2, x2, y2, creature.getPosition().getX(), creature.getPosition().getY());
 
-                        if (distanciCreatureY1 < distanciCreatureY2) {
-                            creature.moveto(1, x1 - 100, y1 - 100);
-                        } else {
-                            creature.moveto(1, x2 + 100, y2 + 100);
-                        }
-                    
-                        break;
+                    if (food == null) {
+                        creature.rotate(3);
                     }
+
+                    break;
+
                 case "gotoFood":
                     if (food != null) {
-                        creature.moveto(1.5, food.getX1(), food.getY1());
+                        double x = food.getX1();
+                        double y = food.getY1();
+                        creature.moveto(1.5,x , y);
                     }
                     //CommandUtility.sendGoTo(creature.getIndex(), 3.0, 3.0, food.getX1(), food.getY1());
                     break;
@@ -230,18 +218,28 @@ public class Environment extends EnvironmentImpl {
 
                         nameBrinck = brink.getName();
 
-                         x1 = brink.getX1();
-                         x2 = brink.getX2();
-                         y1 = brink.getY1();
-                         y2 = brink.getX2();
+                        x1 = brink.getX1();
+                        x2 = brink.getX2();
+                        y1 = brink.getY1();
+                        y2 = brink.getY2();
 
                         double distanciCreatureY1 = GetGeometricDistanceToCreature(x1, y1, x1, y1, creature.getPosition().getX(), creature.getPosition().getY());
                         double distanciCreatureY2 = GetGeometricDistanceToCreature(x2, y2, x2, y2, creature.getPosition().getX(), creature.getPosition().getY());
 
                         if (distanciCreatureY1 < distanciCreatureY2) {
-                            creature.moveto(1, x1 - 100, y1 - 100);
+                            //creature.moveto(0.7, x1 , y1 - 180);
+
+                            if (!listBrink.contains(brink.getName())) {
+                                World.createFood(0, x1, y1 - 200);
+                                listBrink.add(brink.getName());
+                            }
                         } else {
-                            creature.moveto(1, x2 + 100, y2 + 100);
+                            //creature.moveto(0.7, x2 , y2 + 100);
+
+                            if (!listBrink.contains(brink.getName())) {
+                                World.createFood(1, x2, y2 + 200);
+                                listBrink.add(brink.getName());
+                            }
                         }
 
                         // if(distanciCreature < 200)

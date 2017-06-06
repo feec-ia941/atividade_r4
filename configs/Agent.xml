@@ -205,7 +205,7 @@
                     <tasktype>BasicAttentionCodelet</tasktype>
                     <ticksperrun>5</ticksperrun>
                     <param name="nodes" type="string">brink</param>
-                    <param name="refractoryPeriod" type="int">100</param>
+                    <param name="refractoryPeriod" type="int">70</param>
                     <param name="initialActivation" type="double">1.0</param>
                     <param name="learnable.baseLevelActivation" type="double">1.0</param>
                     <param name="learnable.baseLevelRemovalThreshold" type="double">-1.0</param>
@@ -245,7 +245,7 @@
             <param name="proceduralMemory.addingListWeight"  type="double">1.0</param>
             <param name="proceduralMemory.schemeClass">edu.memphis.ccrg.lida.proceduralmemory.SchemeImpl</param>
             <!--   ____scheme_name__ _____ scheme_label_______|_context______|__action_name____|result|baseLabelActiv. -->
-            <param name="scheme.1">if no leaflet brink, rotate|(brink)()|action.rotate|()()|0.5</param>
+            <param name="scheme.1">if no leaflet food, rotate|(food)()|action.rotate|()()|0.5</param>
             <param name="scheme.2">if leaflet jewel, goto jewel|(leafletJewel)()|action.gotoJewel|()()|0.3</param>
             <param name="scheme.3">if food, goto food|(food)()|action.gotoFood|()()|0.3</param>
             <param name="scheme.4">if nearObject, get object|(nearObject)()|action.get|()()|0.02</param>
