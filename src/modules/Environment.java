@@ -50,7 +50,7 @@ public class Environment extends EnvironmentImpl {
             World world = proxy.getWorld();
             world.reset();
             creature = proxy.createCreature(150, 300, 1);
-            creature.start();
+            
 
             int height = world.getEnvironmentHeight();
             int width = world.getEnvironmentWidth();
@@ -60,6 +60,8 @@ public class Environment extends EnvironmentImpl {
             CommandUtility.sendNewBrick(1, 577, 24, 582, 302);
 
             CommandUtility.sendNewJewel(1, 780, 270);
+            
+            creature.start();
 
             System.out.println("Starting the WS3D Resource Generator ... ");
 
